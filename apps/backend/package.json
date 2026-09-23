@@ -1,0 +1,19 @@
+{
+  "name": "@ss-mgmt/backend",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "node src/server.js",
+    "seed:admin": "node src/seed.js"
+  },
+  "dependencies": {
+    "@ss-mgmt/shared": "*",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.4.1"
+  }
+}
