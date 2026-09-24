@@ -25,32 +25,32 @@ export default function LoginPage({ onShowToast }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4" style={{ background: 'var(--gray-50)' }}>
-      <div className="w-full max-w-[420px] animate-fade-in">
+    <div className="min-h-screen flex items-center justify-center p-3 sm:p-4" style={{ background: 'var(--gray-50)' }}>
+      <div className="w-full max-w-[420px] animate-fade-in my-auto py-6">
 
         {/* Brand */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6 sm:mb-8">
           <div
-            className="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center font-black text-xl text-white shadow-lg"
+            className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl mx-auto mb-3 sm:mb-4 flex items-center justify-center font-black text-lg sm:text-xl text-white shadow-lg"
             style={{ background: 'var(--accent-primary)', boxShadow: '0 8px 24px rgba(79,70,229,0.25)' }}
           >
             SS
           </div>
-          <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight" style={{ fontFamily: 'var(--font-heading)', color: 'var(--gray-900)' }}>
+          <h1 className="text-xl sm:text-2xl font-extrabold text-gray-900 tracking-tight" style={{ fontFamily: 'var(--font-heading)', color: 'var(--gray-900)' }}>
             SS Tailoring
           </h1>
-          <p className="text-sm mt-1.5 flex items-center justify-center gap-1.5 font-medium" style={{ color: 'var(--gray-500)' }}>
+          <p className="text-xs sm:text-sm mt-1 flex items-center justify-center gap-1.5 font-medium" style={{ color: 'var(--gray-500)' }}>
             <Scissors className="w-3.5 h-3.5 shrink-0" />
             <span>Management System</span>
           </p>
         </div>
 
         {/* Card */}
-        <div className="card p-8 shadow-sm">
-          <h2 className="text-lg font-bold mb-1 text-gray-900" style={{ fontFamily: 'var(--font-heading)' }}>
+        <div className="card p-5 sm:p-8 shadow-sm">
+          <h2 className="text-base sm:text-lg font-bold mb-1 text-gray-900" style={{ fontFamily: 'var(--font-heading)' }}>
             Sign in to your account
           </h2>
-          <p className="text-xs mb-6 text-gray-500">
+          <p className="text-xs mb-5 sm:mb-6 text-gray-500">
             Enter your credentials to continue
           </p>
 

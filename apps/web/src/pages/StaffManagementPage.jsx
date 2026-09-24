@@ -8,29 +8,29 @@ import { fetchStaff, createStaff, removeStaff } from '../services/api';
 function ConfirmModal({ staff, onConfirm, onCancel, loading }) {
   return (
     <div className="modal-overlay" onClick={onCancel}>
-      <div className="modal-box p-6" onClick={e => e.stopPropagation()}>
-        <div className="flex items-start gap-4">
+      <div className="modal-box p-5 sm:p-6" onClick={e => e.stopPropagation()}>
+        <div className="flex items-start gap-3.5 sm:gap-4">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: '#FEE2E2' }}>
             <Trash2 className="w-5 h-5" style={{ color: '#DC2626' }} />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <h3 className="font-bold text-base" style={{ color: 'var(--gray-900)', fontFamily: 'var(--font-heading)' }}>
               Remove Staff Member?
             </h3>
-            <p className="text-sm mt-1.5" style={{ color: 'var(--gray-500)' }}>
+            <p className="text-xs sm:text-sm mt-1.5" style={{ color: 'var(--gray-500)' }}>
               Are you sure you want to remove <strong style={{ color: 'var(--gray-800)' }}>{staff?.name}</strong>?
               They will no longer be able to log in.
             </p>
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-2.5 mt-6 pt-4" style={{ borderTop: '1px solid var(--gray-100)' }}>
-          <button id="confirm-cancel" className="btn-secondary" onClick={onCancel} disabled={loading}>
+        <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2 sm:gap-2.5 mt-5 sm:mt-6 pt-4" style={{ borderTop: '1px solid var(--gray-100)' }}>
+          <button id="confirm-cancel" className="btn-secondary w-full sm:w-auto" onClick={onCancel} disabled={loading}>
             Cancel
           </button>
           <button
             id="confirm-remove"
-            className="btn-danger"
+            className="btn-danger w-full sm:w-auto"
             onClick={onConfirm}
             disabled={loading}
           >
@@ -141,25 +141,25 @@ export default function StaffManagementPage({ onShowToast }) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
+    <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6 animate-fade-in">
 
       {/* Page Header */}
       <div>
-        <h2 className="text-xl font-bold" style={{ color: 'var(--gray-900)', fontFamily: 'var(--font-heading)' }}>
+        <h2 className="text-lg sm:text-xl font-bold" style={{ color: 'var(--gray-900)', fontFamily: 'var(--font-heading)' }}>
           Staff Management
         </h2>
-        <p className="text-sm mt-1" style={{ color: 'var(--gray-500)' }}>
+        <p className="text-xs sm:text-sm mt-1" style={{ color: 'var(--gray-500)' }}>
           Add, view, and manage staff accounts. Default password for new staff is <strong>123456</strong>.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 items-start">
 
         {/* === Add Staff Form === */}
         <div className="lg:col-span-2">
-          <form onSubmit={handleAddStaff} className="card p-5 space-y-4">
+          <form onSubmit={handleAddStaff} className="card p-4 sm:p-5 space-y-3.5 sm:space-y-4">
             <h3 className="text-sm font-bold flex items-center gap-2" style={{ color: 'var(--gray-800)', fontFamily: 'var(--font-heading)' }}>
-              <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--accent-primary-light)' }}>
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ background: 'var(--accent-primary-light)' }}>
                 <UserPlus className="w-3.5 h-3.5" style={{ color: 'var(--accent-primary)' }} />
               </div>
               Add New Staff
@@ -204,7 +204,7 @@ export default function StaffManagementPage({ onShowToast }) {
                 {STAFF_TYPE_OPTIONS.map(({ value, label, description, icon: Icon }) => (
                   <label
                     key={value}
-                    className="flex items-start gap-3 p-3 rounded-lg cursor-pointer transition-all"
+                    className="flex items-start gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all"
                     style={{
                       border: `1.5px solid ${formType === value ? 'var(--accent-primary)' : 'var(--gray-200)'}`,
                       background: formType === value ? 'var(--accent-primary-light)' : 'var(--white)'
@@ -219,10 +219,10 @@ export default function StaffManagementPage({ onShowToast }) {
                       className="mt-0.5 shrink-0"
                       style={{ accentColor: 'var(--accent-primary)' }}
                     />
-                    <div>
+                    <div className="min-w-0">
                       <div className="flex items-center gap-1.5">
-                        <Icon className="w-3.5 h-3.5" style={{ color: formType === value ? 'var(--accent-primary)' : 'var(--gray-500)' }} />
-                        <span className="text-xs font-bold" style={{ color: formType === value ? 'var(--accent-primary)' : 'var(--gray-700)' }}>
+                        <Icon className="w-3.5 h-3.5 shrink-0" style={{ color: formType === value ? 'var(--accent-primary)' : 'var(--gray-500)' }} />
+                        <span className="text-xs font-bold truncate" style={{ color: formType === value ? 'var(--accent-primary)' : 'var(--gray-700)' }}>
                           {label}
                         </span>
                       </div>
@@ -236,7 +236,7 @@ export default function StaffManagementPage({ onShowToast }) {
             {/* Default Password Notice */}
             <div className="px-3 py-2.5 rounded-lg flex items-center gap-2" style={{ background: 'var(--gray-50)', border: '1px solid var(--gray-200)' }}>
               <span className="text-xs" style={{ color: 'var(--gray-500)' }}>
-                🔑 Default password will be set to <strong style={{ color: 'var(--gray-700)' }}>123456</strong>
+                🔑 Default password: <strong style={{ color: 'var(--gray-700)' }}>123456</strong>
               </span>
             </div>
 
@@ -272,7 +272,7 @@ export default function StaffManagementPage({ onShowToast }) {
         {/* === Staff List === */}
         <div className="lg:col-span-3">
           <div className="card overflow-hidden">
-            <div className="px-5 py-4 flex items-center justify-between" style={{ borderBottom: '1px solid var(--gray-100)' }}>
+            <div className="px-4 sm:px-5 py-3 sm:py-4 flex items-center justify-between" style={{ borderBottom: '1px solid var(--gray-100)' }}>
               <div>
                 <h3 className="text-sm font-bold" style={{ color: 'var(--gray-800)', fontFamily: 'var(--font-heading)' }}>
                   Current Staff
@@ -281,7 +281,7 @@ export default function StaffManagementPage({ onShowToast }) {
                   {staffList.length} staff member{staffList.length !== 1 ? 's' : ''} registered
                 </p>
               </div>
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--gray-50)', border: '1px solid var(--gray-200)' }}>
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ background: 'var(--gray-50)', border: '1px solid var(--gray-200)' }}>
                 <Users className="w-4 h-4" style={{ color: 'var(--gray-400)' }} />
               </div>
             </div>
@@ -292,12 +292,12 @@ export default function StaffManagementPage({ onShowToast }) {
                 <span className="text-xs">Loading staff...</span>
               </div>
             ) : error ? (
-              <div className="py-10 flex flex-col items-center gap-2" style={{ color: '#DC2626' }}>
+              <div className="py-10 flex flex-col items-center gap-2 px-4 text-center" style={{ color: '#DC2626' }}>
                 <AlertCircle className="w-5 h-5" />
                 <p className="text-xs font-medium">{error}</p>
               </div>
             ) : staffList.length === 0 ? (
-              <div className="py-12 flex flex-col items-center gap-2" style={{ color: 'var(--gray-400)' }}>
+              <div className="py-12 flex flex-col items-center gap-2 px-4 text-center" style={{ color: 'var(--gray-400)' }}>
                 <Users className="w-8 h-8" style={{ color: 'var(--gray-300)' }} />
                 <p className="text-sm font-medium" style={{ color: 'var(--gray-500)' }}>No staff members yet</p>
                 <p className="text-xs">Add your first staff member using the form.</p>
@@ -309,27 +309,27 @@ export default function StaffManagementPage({ onShowToast }) {
                   return (
                     <div
                       key={s.id}
-                      className="px-5 py-4 flex items-center justify-between gap-3 group transition-colors"
+                      className="px-3.5 sm:px-5 py-3 sm:py-4 flex flex-col xs:flex-row xs:items-center justify-between gap-2.5 sm:gap-3 group transition-colors"
                       style={{ background: 'var(--white)' }}
                       onMouseEnter={e => e.currentTarget.style.background = 'var(--gray-25)'}
                       onMouseLeave={e => e.currentTarget.style.background = 'var(--white)'}
                     >
-                      <div className="flex items-center gap-3 min-w-0">
+                      <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
                         <div
-                          className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0"
+                          className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-white text-xs sm:text-sm font-bold shrink-0"
                           style={{ background: 'var(--accent-primary)' }}
                         >
                           {s.name.charAt(0).toUpperCase()}
                         </div>
-                        <div className="min-w-0">
-                          <p className="text-sm font-semibold truncate" style={{ color: 'var(--gray-800)' }}>{s.name}</p>
-                          <p className="text-xs truncate" style={{ color: 'var(--gray-400)' }}>{s.email}</p>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs sm:text-sm font-semibold truncate" style={{ color: 'var(--gray-800)' }}>{s.name}</p>
+                          <p className="text-[11px] sm:text-xs truncate" style={{ color: 'var(--gray-400)' }}>{s.email}</p>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-2.5 shrink-0">
+                      <div className="flex items-center justify-between xs:justify-end gap-2 shrink-0 pl-10 xs:pl-0">
                         <span
-                          className="text-[11px] font-bold px-2.5 py-1 rounded-full whitespace-nowrap"
+                          className="text-[10px] sm:text-[11px] font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full whitespace-nowrap"
                           style={{ background: typeInfo.bg, color: typeInfo.color, border: `1px solid ${typeInfo.border}` }}
                         >
                           {typeInfo.text}
@@ -338,7 +338,7 @@ export default function StaffManagementPage({ onShowToast }) {
                         <button
                           id={`remove-staff-${s.id}`}
                           onClick={() => setRemoveTarget(s)}
-                          className="w-8 h-8 rounded-lg flex items-center justify-center transition-all"
+                          className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center transition-all shrink-0"
                           title="Remove staff member"
                           style={{ color: 'var(--gray-400)', background: 'transparent' }}
                           onMouseEnter={e => { e.currentTarget.style.background = '#FEE2E2'; e.currentTarget.style.color = '#DC2626'; }}

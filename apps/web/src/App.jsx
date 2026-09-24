@@ -103,7 +103,7 @@ function MainApp() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: 'var(--gray-50)', color: 'var(--gray-800)', fontFamily: 'var(--font-body)' }}>
+    <div className="min-h-screen flex flex-col w-full overflow-x-hidden" style={{ background: 'var(--gray-50)', color: 'var(--gray-800)', fontFamily: 'var(--font-body)' }}>
       <Toast message={toastMessage} />
 
       <Navbar
@@ -112,9 +112,9 @@ function MainApp() {
         onShowToast={showToast}
       />
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-3.5 sm:px-6 py-4 sm:py-6">
         {loading ? (
-          <div className="flex flex-col items-center justify-center py-24 gap-4">
+          <div className="flex flex-col items-center justify-center py-20 sm:py-24 gap-4">
             <div className="w-10 h-10 rounded-full border-3 animate-spin" style={{ borderColor: 'var(--gray-200)', borderTopColor: 'var(--accent-primary)', borderWidth: '3px' }} />
             <p className="text-sm font-medium" style={{ color: 'var(--gray-400)' }}>Loading data...</p>
           </div>
@@ -163,7 +163,7 @@ function MainApp() {
       </main>
 
       <footer
-        className="py-4 text-center text-xs font-medium"
+        className="py-3.5 sm:py-4 px-4 text-center text-xs font-medium"
         style={{
           background: 'var(--white)',
           borderTop: '1px solid var(--gray-200)',

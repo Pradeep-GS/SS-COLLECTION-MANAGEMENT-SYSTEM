@@ -9,8 +9,8 @@ import { fetchStaff } from '../services/api';
 function ConfirmDeleteModal({ customerName, onConfirm, onCancel }) {
   return (
     <div className="modal-overlay" onClick={onCancel}>
-      <div className="modal-box p-6" onClick={e => e.stopPropagation()}>
-        <div className="flex items-start gap-4">
+      <div className="modal-box p-5 sm:p-6" onClick={e => e.stopPropagation()}>
+        <div className="flex items-start gap-3.5 sm:gap-4">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: '#FEE2E2' }}>
             <Trash2 className="w-5 h-5" style={{ color: '#DC2626' }} />
           </div>
@@ -18,15 +18,15 @@ function ConfirmDeleteModal({ customerName, onConfirm, onCancel }) {
             <h3 className="font-bold text-base" style={{ color: 'var(--gray-900)', fontFamily: 'var(--font-heading)' }}>
               Delete Customer?
             </h3>
-            <p className="text-sm mt-1" style={{ color: 'var(--gray-500)' }}>
+            <p className="text-xs sm:text-sm mt-1" style={{ color: 'var(--gray-500)' }}>
               Are you sure you want to delete <strong style={{ color: 'var(--gray-800)' }}>{customerName}</strong>?
               This action cannot be undone.
             </p>
           </div>
         </div>
-        <div className="flex items-center justify-end gap-2.5 mt-6 pt-4" style={{ borderTop: '1px solid var(--gray-100)' }}>
-          <button id="delete-cancel" className="btn-secondary" onClick={onCancel}>Cancel</button>
-          <button id="delete-confirm" className="btn-danger" onClick={onConfirm}>
+        <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2 sm:gap-2.5 mt-5 sm:mt-6 pt-4" style={{ borderTop: '1px solid var(--gray-100)' }}>
+          <button id="delete-cancel" className="btn-secondary w-full sm:w-auto" onClick={onCancel}>Cancel</button>
+          <button id="delete-confirm" className="btn-danger w-full sm:w-auto" onClick={onConfirm}>
             <Trash2 className="w-4 h-4" /> Delete Customer
           </button>
         </div>
@@ -78,48 +78,48 @@ export default function DashboardPage({ customers, onDeleteCustomer, onSelectCus
   const staffTypeLabel = user?.staffType === 'TAILOR' ? 'Tailor' : user?.staffType === 'FULL_DETAIL' ? 'Full Detail Staff' : null;
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-4 sm:space-y-6 animate-fade-in">
 
       {/* Stats Row — Admin only */}
       {isAdmin && (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 xs:grid-cols-3 gap-3 sm:gap-4">
           {/* Total Customers */}
-          <div className="card card-hover p-5 flex items-center justify-between">
+          <div className="card card-hover p-4 sm:p-5 flex items-center justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--gray-400)' }}>Total Customers</p>
-              <p className="text-3xl font-extrabold mt-1" style={{ color: 'var(--gray-900)', fontFamily: 'var(--font-heading)' }}>
+              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--gray-400)' }}>Total Customers</p>
+              <p className="text-2xl sm:text-3xl font-extrabold mt-0.5 sm:mt-1" style={{ color: 'var(--gray-900)', fontFamily: 'var(--font-heading)' }}>
                 {customers.length}
               </p>
             </div>
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'var(--accent-primary-light)' }}>
-              <Users className="w-6 h-6" style={{ color: 'var(--accent-primary)' }} />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'var(--accent-primary-light)' }}>
+              <Users className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: 'var(--accent-primary)' }} />
             </div>
           </div>
 
           {/* Total Staff */}
-          <div className="card card-hover p-5 flex items-center justify-between">
+          <div className="card card-hover p-4 sm:p-5 flex items-center justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--gray-400)' }}>Staff Members</p>
-              <p className="text-3xl font-extrabold mt-1" style={{ color: 'var(--gray-900)', fontFamily: 'var(--font-heading)' }}>
+              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--gray-400)' }}>Staff Members</p>
+              <p className="text-2xl sm:text-3xl font-extrabold mt-0.5 sm:mt-1" style={{ color: 'var(--gray-900)', fontFamily: 'var(--font-heading)' }}>
                 {staffCount === null ? '—' : staffCount}
               </p>
             </div>
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: '#F0FDF4' }}>
-              <Shield className="w-6 h-6" style={{ color: '#16A34A' }} />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0" style={{ background: '#F0FDF4' }}>
+              <Shield className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: '#16A34A' }} />
             </div>
           </div>
 
-          {/* Recent */}
-          <div className="card card-hover p-5 flex items-center justify-between">
+          {/* Showing */}
+          <div className="card card-hover p-4 sm:p-5 flex items-center justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--gray-400)' }}>Showing</p>
-              <p className="text-3xl font-extrabold mt-1" style={{ color: 'var(--gray-900)', fontFamily: 'var(--font-heading)' }}>
+              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--gray-400)' }}>Showing</p>
+              <p className="text-2xl sm:text-3xl font-extrabold mt-0.5 sm:mt-1" style={{ color: 'var(--gray-900)', fontFamily: 'var(--font-heading)' }}>
                 {filteredCustomers.length}
               </p>
-              <p className="text-xs mt-0.5" style={{ color: 'var(--gray-400)' }}>of {customers.length} records</p>
+              <p className="text-[10px] sm:text-xs mt-0.5" style={{ color: 'var(--gray-400)' }}>of {customers.length} records</p>
             </div>
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: '#FFFBEB' }}>
-              <LayoutDashboard className="w-6 h-6" style={{ color: '#D97706' }} />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0" style={{ background: '#FFFBEB' }}>
+              <LayoutDashboard className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: '#D97706' }} />
             </div>
           </div>
         </div>
@@ -127,16 +127,16 @@ export default function DashboardPage({ customers, onDeleteCustomer, onSelectCus
 
       {/* Staff greeting (non-admin) */}
       {!isAdmin && (
-        <div className="card p-5 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'var(--accent-primary-light)' }}>
+        <div className="card p-4 sm:p-5 flex items-center gap-3.5 sm:gap-4">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'var(--accent-primary-light)' }}>
             {user?.staffType === 'TAILOR' ? (
-              <Scissors className="w-6 h-6" style={{ color: 'var(--accent-primary)' }} />
+              <Scissors className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: 'var(--accent-primary)' }} />
             ) : (
-              <Eye className="w-6 h-6" style={{ color: 'var(--accent-primary)' }} />
+              <Eye className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: 'var(--accent-primary)' }} />
             )}
           </div>
           <div>
-            <p className="font-bold text-sm" style={{ color: 'var(--gray-800)', fontFamily: 'var(--font-heading)' }}>
+            <p className="font-bold text-sm sm:text-base" style={{ color: 'var(--gray-800)', fontFamily: 'var(--font-heading)' }}>
               Welcome, {user?.name}
             </p>
             <p className="text-xs mt-0.5" style={{ color: 'var(--gray-500)' }}>
@@ -147,7 +147,7 @@ export default function DashboardPage({ customers, onDeleteCustomer, onSelectCus
       )}
 
       {/* Search & Header */}
-      <div className="card p-4 flex flex-col sm:flex-row items-center gap-3">
+      <div className="card p-3 sm:p-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
         <div className="relative flex-1 w-full">
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2" style={{ color: 'var(--gray-400)' }} />
           <input
@@ -163,7 +163,7 @@ export default function DashboardPage({ customers, onDeleteCustomer, onSelectCus
           <button
             id="dashboard-add-customer"
             onClick={() => onNavigate('ADD_CUSTOMER')}
-            className="btn-primary whitespace-nowrap"
+            className="btn-primary w-full sm:w-auto"
           >
             <UserPlus className="w-4 h-4" />
             Add Customer
@@ -173,7 +173,7 @@ export default function DashboardPage({ customers, onDeleteCustomer, onSelectCus
 
       {/* Customer Table */}
       <div className="card overflow-hidden">
-        <div className="px-5 py-3.5 flex items-center justify-between" style={{ borderBottom: '1px solid var(--gray-100)', background: 'var(--gray-25)' }}>
+        <div className="px-4 sm:px-5 py-3 sm:py-3.5 flex items-center justify-between" style={{ borderBottom: '1px solid var(--gray-100)', background: 'var(--gray-25)' }}>
           <h2 className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--gray-500)' }}>
             Customer Records
           </h2>
@@ -183,7 +183,7 @@ export default function DashboardPage({ customers, onDeleteCustomer, onSelectCus
         </div>
 
         {filteredCustomers.length === 0 ? (
-          <div className="py-16 flex flex-col items-center gap-3">
+          <div className="py-12 sm:py-16 px-4 flex flex-col items-center gap-3 text-center">
             <Users className="w-10 h-10" style={{ color: 'var(--gray-300)' }} />
             <p className="text-sm font-semibold" style={{ color: 'var(--gray-500)' }}>
               {searchQuery ? `No results for "${searchQuery}"` : 'No customers yet'}
@@ -201,7 +201,7 @@ export default function DashboardPage({ customers, onDeleteCustomer, onSelectCus
                 key={c.id}
                 id={`customer-row-${c.id}`}
                 onClick={() => onSelectCustomer(c.id, 'VIEW_CUSTOMER')}
-                className="flex items-center px-5 py-3.5 cursor-pointer transition-colors group"
+                className="flex items-center px-3 sm:px-5 py-3 sm:py-3.5 cursor-pointer transition-colors group"
                 style={{
                   borderBottom: idx < filteredCustomers.length - 1 ? '1px solid var(--gray-100)' : 'none',
                   background: 'var(--white)'
@@ -211,41 +211,41 @@ export default function DashboardPage({ customers, onDeleteCustomer, onSelectCus
               >
                 {/* Avatar */}
                 <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0 mr-3"
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-white text-xs sm:text-sm font-bold shrink-0 mr-2.5 sm:mr-3"
                   style={{ background: 'var(--accent-primary)' }}
                 >
                   {c.fullName?.charAt(0)?.toUpperCase() || '?'}
                 </div>
 
                 {/* Name + Code + Phone */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-sm font-semibold" style={{ color: 'var(--gray-800)' }}>{c.fullName}</span>
+                <div className="flex-1 min-w-0 pr-1">
+                  <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                    <span className="text-xs sm:text-sm font-semibold truncate" style={{ color: 'var(--gray-800)' }}>{c.fullName}</span>
                     <span
-                      className="text-[10px] font-bold px-2 py-0.5 rounded-md"
+                      className="text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-md shrink-0"
                       style={{ background: 'var(--gray-100)', color: 'var(--gray-500)', border: '1px solid var(--gray-200)' }}
                     >
                       {c.customerCode}
                     </span>
                   </div>
                   {c.phoneNumber && (
-                    <p className="text-xs mt-0.5" style={{ color: 'var(--gray-400)' }}>{c.phoneNumber}</p>
+                    <p className="text-[11px] sm:text-xs mt-0.5 truncate" style={{ color: 'var(--gray-400)' }}>{c.phoneNumber}</p>
                   )}
                 </div>
 
                 {/* Date + Actions */}
-                <div className="flex items-center gap-3 ml-3 shrink-0">
-                  <div className="hidden sm:flex items-center gap-1 text-xs" style={{ color: 'var(--gray-400)' }}>
+                <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+                  <div className="hidden md:flex items-center gap-1 text-xs" style={{ color: 'var(--gray-400)' }}>
                     <Calendar className="w-3.5 h-3.5" />
                     {new Date(c.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: '2-digit' })}
                   </div>
 
                   {isAdmin && (
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-0.5 sm:gap-1">
                       <button
                         id={`edit-customer-${c.id}`}
                         onClick={e => { e.stopPropagation(); onSelectCustomer(c.id, 'EDIT_CUSTOMER'); }}
-                        className="w-7 h-7 rounded-lg flex items-center justify-center transition-all"
+                        className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center transition-all"
                         title="Edit Customer"
                         style={{ color: 'var(--gray-400)' }}
                         onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent-primary-light)'; e.currentTarget.style.color = 'var(--accent-primary)'; }}
@@ -256,7 +256,7 @@ export default function DashboardPage({ customers, onDeleteCustomer, onSelectCus
                       <button
                         id={`delete-customer-${c.id}`}
                         onClick={e => handleDeleteClick(e, c.id, c.fullName)}
-                        className="w-7 h-7 rounded-lg flex items-center justify-center transition-all"
+                        className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center transition-all"
                         title="Delete Customer"
                         style={{ color: 'var(--gray-400)' }}
                         onMouseEnter={e => { e.currentTarget.style.background = '#FEE2E2'; e.currentTarget.style.color = '#DC2626'; }}
@@ -267,7 +267,7 @@ export default function DashboardPage({ customers, onDeleteCustomer, onSelectCus
                     </div>
                   )}
 
-                  <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" style={{ color: 'var(--gray-300)' }} />
+                  <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 shrink-0" style={{ color: 'var(--gray-300)' }} />
                 </div>
               </div>
             ))}
