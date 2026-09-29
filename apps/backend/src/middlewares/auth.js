@@ -5,8 +5,8 @@ const JWT_SECRET = process.env.JWT_SECRET || 'ss-tailoring-secret-key-change-in-
 
 const authenticateToken = (req, res, next) => {
   // Public routes that don't require auth
-  const publicRoutes = ['/api/v1/auth/login'];
-  if (publicRoutes.includes(req.path)) {
+  const publicRoutes = ['/', '/health', '/api/v1/auth/login'];
+  if (publicRoutes.includes(req.path) || req.path === '' || req.path === '/') {
     return next();
   }
 

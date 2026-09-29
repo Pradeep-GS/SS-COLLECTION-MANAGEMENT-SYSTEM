@@ -28,13 +28,16 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Auth middleware (verifies JWT on all protected routes)
-app.use(authenticateToken);
-
-// Routes
-app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/customers', customerRoutes);
-app.use('/api/v1/staff', staffRoutes);
+// Root & Health check endpoints (Public)
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    service: 'ss-tailoring-backend',
+    status: 'online',
+    mongoConnected: getIsConnected(),
+    timestamp: new Date().toISOString()
+  });
+});
 
 app.get('/health', (req, res) => {
   res.json({
@@ -45,6 +48,14 @@ app.get('/health', (req, res) => {
     time: new Date()
   });
 });
+
+// Auth middleware (verifies JWT on all protected routes)
+app.use(authenticateToken);
+
+// Routes
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/customers', customerRoutes);
+app.use('/api/v1/staff', staffRoutes);
 
 // Connect DB and launch server
 connectDB().then((success) => {
