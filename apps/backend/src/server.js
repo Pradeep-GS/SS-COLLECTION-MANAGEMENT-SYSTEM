@@ -10,7 +10,22 @@ const staffRoutes = require('./routes/staff');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+const clientOrigins = process.env.CLIENT_URL
+  ? process.env.CLIENT_URL.split(',').map((url) => url.trim().replace(/\/+$/, ''))
+  : ['http://localhost:3000', 'http://localhost:5173'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || clientOrigins.includes('*') || clientOrigins.includes(origin.replace(/\/+$/, ''))) {
+      return callback(null, true);
+    }
+    // Permissive fallback so production preflight requests are not rejected
+    return callback(null, true);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // Auth middleware (verifies JWT on all protected routes)

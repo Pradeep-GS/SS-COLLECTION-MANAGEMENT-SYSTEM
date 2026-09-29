@@ -1,4 +1,8 @@
-const API_BASE = import.meta.env.VITE_API_URL || '/api/v1';
+const rawApiUrl = (import.meta.env.VITE_API_URL || '/api/v1').trim().replace(/\/+$/, '');
+const API_BASE = rawApiUrl.endsWith('/api/v1')
+  ? rawApiUrl
+  : (rawApiUrl.startsWith('http') ? `${rawApiUrl}/api/v1` : rawApiUrl);
+
 
 function getAuthHeaders(extra = {}) {
   const token = localStorage.getItem('ss_auth_token');
