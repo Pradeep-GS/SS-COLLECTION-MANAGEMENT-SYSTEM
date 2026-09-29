@@ -4,6 +4,7 @@
   "main": "src/server.js",
   "scripts": {
     "dev": "node src/server.js",
+    "build": "echo 'Backend build complete'",
     "start": "node src/server.js",
     "seed:admin": "node src/seed.js"
   },
