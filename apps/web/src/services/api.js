@@ -18,6 +18,28 @@ function getAuthHeadersNoBody() {
   return token ? { 'Authorization': `Bearer ${token}` } : {};
 }
 
+async function parseResponse(res) {
+  try {
+    const text = await res.text();
+    if (!text) {
+      return { 
+        success: res.ok, 
+        error: res.ok ? null : `Server returned status ${res.status} (${res.statusText || 'Empty response'})` 
+      };
+    }
+    try {
+      return JSON.parse(text);
+    } catch {
+      return { 
+        success: false, 
+        error: `Server error (${res.status}): ${text.slice(0, 150)}` 
+      };
+    }
+  } catch (err) {
+    return { success: false, error: err.message || 'Network request failed' };
+  }
+}
+
 // --- Auth ---
 
 export async function loginUser(email, password) {
@@ -27,7 +49,7 @@ export async function loginUser(email, password) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
     });
-    return await res.json();
+    return await parseResponse(res);
   } catch (err) {
     return { success: false, error: err.message };
   }
@@ -40,8 +62,8 @@ export async function fetchCustomers(search = '') {
     const res = await fetch(`${API_BASE}/customers?search=${encodeURIComponent(search)}`, {
       headers: getAuthHeadersNoBody()
     });
-    const json = await res.json();
-    return json.success ? json.data.customers : [];
+    const json = await parseResponse(res);
+    return json.success ? (json.data?.customers || []) : [];
   } catch (err) {
     console.warn('Backend API fetch error:', err);
     return [];
@@ -53,7 +75,7 @@ export async function fetchCustomer(id) {
     const res = await fetch(`${API_BASE}/customers/${id}`, {
       headers: getAuthHeadersNoBody()
     });
-    return await res.json();
+    return await parseResponse(res);
   } catch (err) {
     return { success: false, error: err.message };
   }
@@ -66,7 +88,7 @@ export async function createCustomer(customerData) {
       headers: getAuthHeaders(),
       body: JSON.stringify(customerData)
     });
-    return await res.json();
+    return await parseResponse(res);
   } catch (err) {
     return { success: false, error: err.message };
   }
@@ -79,7 +101,7 @@ export async function updateCustomer(id, updateData) {
       headers: getAuthHeaders(),
       body: JSON.stringify(updateData)
     });
-    return await res.json();
+    return await parseResponse(res);
   } catch (err) {
     return { success: false, error: err.message };
   }
@@ -91,7 +113,7 @@ export async function deleteCustomer(id) {
       method: 'DELETE',
       headers: getAuthHeadersNoBody()
     });
-    return await res.json();
+    return await parseResponse(res);
   } catch (err) {
     return { success: false, error: err.message };
   }
@@ -104,7 +126,7 @@ export async function addInstruction(customerId, note, garmentType) {
       headers: getAuthHeaders(),
       body: JSON.stringify({ note, garmentType })
     });
-    return await res.json();
+    return await parseResponse(res);
   } catch (err) {
     return { success: false, error: err.message };
   }
@@ -117,7 +139,7 @@ export async function fetchStaff() {
     const res = await fetch(`${API_BASE}/staff`, {
       headers: getAuthHeadersNoBody()
     });
-    return await res.json();
+    return await parseResponse(res);
   } catch (err) {
     return { success: false, error: err.message };
   }
@@ -130,7 +152,7 @@ export async function createStaff(staffData) {
       headers: getAuthHeaders(),
       body: JSON.stringify(staffData)
     });
-    return await res.json();
+    return await parseResponse(res);
   } catch (err) {
     return { success: false, error: err.message };
   }
@@ -142,7 +164,7 @@ export async function removeStaff(id) {
       method: 'DELETE',
       headers: getAuthHeadersNoBody()
     });
-    return await res.json();
+    return await parseResponse(res);
   } catch (err) {
     return { success: false, error: err.message };
   }
